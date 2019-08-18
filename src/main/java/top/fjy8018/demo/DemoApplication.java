@@ -14,7 +14,7 @@ public class DemoApplication {
         SpringApplication.run(DemoApplication.class, args);
     }
 
-    @RequestMapping("/{content}")
+    @RequestMapping("/print/{content}")
     public String helloWorld(@PathVariable(name = "content", required = false) String content) {
         return "hello , " + content;
     }
