@@ -8,3 +8,7 @@ management:
   endpoint:
     health:
       show-details: always
+info:
+  app:
+    author: F嘉阳
+    encoding: @project.build.sourceEncoding@
