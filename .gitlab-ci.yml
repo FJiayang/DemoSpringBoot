@@ -4,7 +4,11 @@ services:
 
 variables:
   DOCKER_DRIVER: overlay
-  SPRING_PROFILES_ACTIVE: gitlab-ci
+  DOCKER_TLS_CERTDIR: "/certs"
+  IMAGE_VERSION: $CI_COMMIT_TAG
+
+before_script:
+  - "echo 构建版本号: ${IMAGE_VERSION}"
 
 stages:
   - build
@@ -13,6 +17,8 @@ stages:
 maven-build:
   image: maven:3-jdk-8
   stage: build
+  tags:
+    - 2T
   script: "mvn package -B"
   artifacts:
     paths:
@@ -20,7 +26,10 @@ maven-build:
 
 docker-build:
   stage: package
+  tags:
+    - 2T
   script:
-    - docker build -t $CONTAINER_IMAGE:1.4 .
+    - docker build -t $CONTAINER_IMAGE:$IMAGE_VERSION .
     - docker login -u $DOCKER_HUB_USER -p $DOCKER_HUB_PASS
-    - docker push $CONTAINER_IMAGE:1.4
+    - docker push $CONTAINER_IMAGE:$IMAGE_VERSION\
+    - docker logout
