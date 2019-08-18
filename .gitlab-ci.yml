@@ -8,8 +8,8 @@ variables:
   IMAGE_VERSION: $CI_COMMIT_TAG
 
 before_script:
-  - "echo 构建版本号: "${$IMAGE_VERSION}"
-  - "echo 标签: "${$CI_COMMIT_TAG}"
+  - echo 构建版本号: $IMAGE_VERSION
+  - echo 标签: $CI_COMMIT_TAG
 
 stages:
   - build
