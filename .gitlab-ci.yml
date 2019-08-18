@@ -18,7 +18,7 @@ maven-build:
   image: maven:3-jdk-8
   stage: build
   tags:
-    - 2T
+    - DC8
   script: "mvn package -B"
   artifacts:
     paths:
@@ -27,7 +27,7 @@ maven-build:
 docker-build:
   stage: package
   tags:
-    - 2T
+    - DC8
   script:
     - docker build -t $CONTAINER_IMAGE:$IMAGE_VERSION .
     - docker login -u $DOCKER_HUB_USER -p $DOCKER_HUB_PASS
